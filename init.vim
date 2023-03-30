@@ -1,11 +1,36 @@
 if !exists('g:vscode')
-	set runtimepath^=~/.vim runtimepath+=~/.vim/after
-	let &packpath = &runtimepath
-	source ~/.vimrc
+    " Spaces & Tabs {{{
+    set tabstop=4       " number of visual spaces per TAB
+    set softtabstop=4   " number of spaces in tab when editing
+    set shiftwidth=4    " number of spaces to use for autoindent
+    set expandtab       " tabs are space
+    set autoindent
+    set copyindent      " copy indent from the previous line
+    " }}} Spaces & Tabs
 
-	set number
-	set syntax=c
-	set autochdir
+    " Clipboard {{{
+    set clipboard+=unnamedplus
+    " }}} Clipboard
+
+    " UI Config {{{
+    set hidden
+    set number                   " show line number
+    set showcmd                  " show command in bottom bar
+    set cursorline               " highlight current line
+    set wildmenu                 " visual autocomplete for command menu
+    set showmatch                " highlight matching brace
+    set laststatus=2             " window will always have a status line
+    set nobackup
+    set noswapfile
+    let &colorcolumn="80,".join(range(119,999),",")
+    " }}} UI Config
+
+    " Search {{{
+    set incsearch       " search as characters are entered
+    set hlsearch        " highlight matche
+    set ignorecase      " ignore case when searching
+    set smartcase       " ignore case if search pattern is lower case
+                        " case-sensitive otherwise
 
 	""" VARIABLES """
 
@@ -51,14 +76,25 @@ if !exists('g:vscode')
 
 	" Personal Plugins
 	
+	" Theme
+	Plug 'joshdick/onedark.vim'
+	
 	" Latex support
 	Plug 'lervag/vimtex'
 	
-	" deoplete
-	Plug 'zchee/deoplete-jedi'
+	" deoplete (DISABLED)
+	" Plug 'zchee/deoplete-jedi'
+	
+	" Use release branch of coc
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 	" Initialize plugin system
 	call plug#end()
+	
+	" Python syntax highlighting
+	Plug 'vim-python/python-syntax'
+	
+	colorscheme onedark " Enable the colour scheme
 
 
 endif
